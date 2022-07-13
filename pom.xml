@@ -6,48 +6,59 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.miniorange.secureshare</groupId>
-    <artifactId>jira-shareissue</artifactId>
+    <artifactId>confluence-sharepage</artifactId>
     <version>1.0.4</version>
 
     <organization>
         <name>miniOrange</name>
-        <url>https://www.miniorange.com/</url>
+        <url>https://miniorange.com/</url>
     </organization>
 
-    <name>Share Issue for Jira</name>
-    <description>
-        Secure share lets you share links for jira issues with password protection and expiry.
-        You could share the Jira issue access link via email to non-Jira users.
-    </description>
+    <name>Share Page for Confluence</name>
+    <description>Share Page lets you share anonymous access links for confluence pages with features like password protection and expiry over the links.</description>
     <packaging>atlassian-plugin</packaging>
 
     <dependencies>
-        <dependency>
-            <groupId>com.atlassian.jira</groupId>
-            <artifactId>jira-api</artifactId>
-            <version>${jira.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Add dependency on jira-core if you want access to JIRA implementation classes as well as the sanctioned API. -->
-        <!-- This is not normally recommended, but may be required eg when migrating a plugin originally developed against JIRA 4.x -->
-        <dependency>
-            <groupId>com.atlassian.jira</groupId>
-            <artifactId>jira-core</artifactId>
-            <version>${jira.version}</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence</artifactId>
+            <version>${confluence.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
-        <!-- spring scanner-->
         <dependency>
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-annotation</artifactId>
             <version>${atlassian.spring.scanner.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- javax.servlet.api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- org.springframework.stereotype -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.3.18</version>
             <scope>provided</scope>
         </dependency>
 
@@ -66,58 +77,22 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.atlassian.sal/sal-api -->
+        <!-- TemplateRenderer -->
         <dependency>
-            <groupId>com.atlassian.sal</groupId>
-            <artifactId>sal-api</artifactId>
-            <version>4.0.0</version>
+            <groupId>com.atlassian.templaterenderer</groupId>
+            <artifactId>atlassian-template-renderer-api</artifactId>
+            <version>1.1.1</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- org.springframework.stereotype -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>4.3.9.RELEASE</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.activeobjects</groupId>
-            <artifactId>activeobjects-plugin</artifactId>
-            <version>${ao.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-
-        <!-- Google Collections, useful utilities for manipulating collections -->
-        <dependency>
-            <groupId>com.google.collections</groupId>
-            <artifactId>google-collections</artifactId>
-            <version>1.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.4</version>
-            <scope>provided</scope>
-        </dependency>
-
+        <!-- Scheduler -->
         <dependency>
             <groupId>com.atlassian.scheduler</groupId>
             <artifactId>atlassian-scheduler-api</artifactId>
             <version>1.0</version>
             <scope>provided</scope>
         </dependency>
+
 
         <!-- WIRED TEST RUNNER DEPENDENCIES -->
         <dependency>
@@ -136,80 +111,19 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.2.2-atlassian-1</version>
-            <scope>provided</scope>
         </dependency>
-
-        <!-- sl4j-->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.9</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!--template renderer -->
-        <dependency>
-            <groupId>com.atlassian.templaterenderer</groupId>
-            <artifactId>atlassian-template-renderer-api</artifactId>
-            <version>1.1.1</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.4</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.8.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.mail</groupId>
-            <artifactId>atlassian-mail</artifactId>
-            <version>4.0.4</version>
-            <scope>provided</scope>
-        </dependency>
-
-
-
-        <!-- Uncomment to use TestKit in your project. Details at https://bitbucket.org/atlassian/jira-testkit -->
-        <!-- You can read more about TestKit at https://developer.atlassian.com/display/JIRADEV/Plugin+Tutorial+-+Smarter+integration+testing+with+TestKit -->
-        <!--
-        <dependency>
-            <groupId>com.atlassian.jira.tests</groupId>
-            <artifactId>jira-testkit-client</artifactId>
-            <version>${testkit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        -->
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
-                <artifactId>jira-maven-plugin</artifactId>
+                <artifactId>confluence-maven-plugin</artifactId>
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <productVersion>${jira.version}</productVersion>
-                    <productDataVersion>${jira.version}</productDataVersion>
-                    <!-- Uncomment to install TestKit backdoor in JIRA. -->
-                    <!--
-                    <pluginArtifacts>
-                        <pluginArtifact>
-                            <groupId>com.atlassian.jira.tests</groupId>
-                            <artifactId>jira-testkit-plugin</artifactId>
-                            <version>${testkit.version}</version>
-                        </pluginArtifact>
-                    </pluginArtifacts>
-                    -->
+                    <productVersion>${confluence.version}</productVersion>
+                    <productDataVersion>${confluence.data.version}</productDataVersion>
                     <enableQuickReload>true</enableQuickReload>
 
                     <!-- See here for an explanation of default instructions: -->
@@ -217,17 +131,14 @@
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
 
+                        <Spring-Context>*</Spring-Context>
                         <!-- Add package to export here -->
                         <Export-Package>
-                            com.miniorange.secureshare.jira.api,
+                            com.miniorange.secureshare.confluence.api,
                         </Export-Package>
 
                         <!-- Add package import here -->
                         <Import-Package>
-                            javax.ws.rs*;version="[1,2)",
-                            javax.servlet*;version="2.5",
-                            javax.xml.bind*;version="[2.1,3)",
-                            *;version="0";resolution:=optional,
                             org.springframework.osgi.*;resolution:="optional",
                             org.eclipse.gemini.blueprint.*;resolution:="optional",
                             *
@@ -265,15 +176,13 @@
     </build>
 
     <properties>
-        <jira.version>7.13.0</jira.version>
+        <confluence.version>6.14.0</confluence.version>
+        <confluence.data.version>6.14.0</confluence.data.version>
         <amps.version>8.0.2</amps.version>
-        <ao.version>1.4.0</ao.version>
         <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
         <atlassian.spring.scanner.version>2.2.0</atlassian.spring.scanner.version>
         <!-- This property ensures consistency between the key in atlassian-plugin.xml and the OSGi bundle's key. -->
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <!-- TestKit version 6.x for JIRA 6.x -->
-        <testkit.version>6.3.11</testkit.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
