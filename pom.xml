@@ -250,7 +250,7 @@
 		<dependency>
 			<groupId>com.google.apis</groupId>
 			<artifactId>google-api-services-admin</artifactId>
-			<version>directory_v1-rev22-1.16.0-rc</version>
+			<version>directory_v1-rev29-1.14.2-beta</version>
 		</dependency>
 
 	</dependencies>
